@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle  } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import * as VAR from "./variables";
 
 //TODO: her comp için ayrı style dosyası açılabilir
@@ -9,8 +9,14 @@ export const Deck = styled.div`
     grid-template-rows: repeat(
         20,
         ${VAR.CARD_HEAD_HEIGHT}
-    ); //TODO: 30 sayısı ortak dosyadan alınacak
+    );
+    min-width: ${VAR.CARD_WIDTH};
+`;
 
+export const Decks = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 30px;
 `;
 
 export const App = styled.div`
@@ -20,16 +26,14 @@ export const App = styled.div`
         rgba(57, 133, 192, 1)
     );
     height: 100vh;
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 30px;
+
 `;
 
 export const Card = styled.div`
     font-family: "optien";
     display: inline-flex;
     flex-direction: column;
-    width: 6.66rem;
+    width: ${VAR.CARD_WIDTH};
     height: 10rem;
     background-color: white;
     border-radius: 10px;

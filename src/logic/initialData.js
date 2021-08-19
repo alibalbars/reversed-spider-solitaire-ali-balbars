@@ -15,12 +15,6 @@ function generateCards() {
     let idCounter = 1;
 
     cardInfo["rank"].forEach((rank) => {
-        // console.log(+rank);
-
-
-        // if(isNaN(Number(rank))) {
-        //     console.log('true');
-        // }
 
         // There is 13 rank, for two deck 13 * 8 = 104 cards
         for (let i = 1; i <= 8; i++) {
@@ -30,7 +24,8 @@ function generateCards() {
                 id: idCounter,
                 rank: rank,
                 suit: "spade",
-                isBackFace: false,
+                // isBackFace: true,
+                isOpen: true,
                 deck: i,
             });
             // console.log(idCounter);

@@ -6,3 +6,4 @@ export const EXTRA = '1200px';
 
 
 export const CARD_HEAD_HEIGHT = '2rem';
+export const CARD_WIDTH = '6.66rem';

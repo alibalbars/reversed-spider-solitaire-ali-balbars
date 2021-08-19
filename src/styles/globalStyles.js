@@ -4,13 +4,12 @@ import * as VAR from "./variables";
 
 const GlobalStyle = createGlobalStyle`
 
-    html {
-        font-size: 15px;
-    }
-
     // Reset
-    body {
+    html, body {
+        font-size: 15px;
         margin: 0;
+        height: 100%;
+        overflow: hidden;
     }
 
     // Load 'Optien' font
