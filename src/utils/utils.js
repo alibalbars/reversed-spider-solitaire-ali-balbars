@@ -102,7 +102,7 @@ export function moveCard(destination, source, draggableId, initialData) {
 
     // Drag to same deck
     if (destination.droppableId === source.droppableId) {
-        return;
+        return initialData;
     }
 
     const startDeck = initialData.decks[source.droppableId];

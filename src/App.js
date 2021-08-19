@@ -40,7 +40,6 @@ export default function App() {
         );
 
         setInitialData(newInitialData);
-
     }
 
     return (
