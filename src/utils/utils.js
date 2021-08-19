@@ -96,6 +96,7 @@ export function isDroppable(card, droppableDeck) {
 export function moveCard(destination, source, draggableId, initialData) {
     // Drag to undesirable area
     if (!destination) {
+        console.log('geldi');
         return initialData;
     }
 

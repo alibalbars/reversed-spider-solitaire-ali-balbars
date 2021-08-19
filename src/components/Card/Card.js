@@ -13,9 +13,6 @@ const BackFace = () => {
 };
 
 export default function Card({ card, index, deck, selectedCards }) {
-    useEffect(() => {
-        console.log("open", deck.openCardCount);
-    }, []);
 
     if (index < deck.cards.length - deck.openCardCount) {
         return <BackFace></BackFace>;
