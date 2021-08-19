@@ -11,22 +11,19 @@ export default function App() {
     const [selectedCards, setSelectedCards] = useState([]);
 
     useEffect(() => {
-        console.log("initialData", initialData);
+        console.log("initialData", initialData.decks);
     }, []);
 
     function onDragStart(start) {
         const { source, draggableId } = start;
         const startDeck = initialData.decks[source.droppableId];
         const serialIndexes = getSerialIndexes(startDeck, source.index);
+
         // Carried cards
         const carriedCards = serialIndexes.map((index) => {
             return startDeck.cards[index];
         });
         setSelectedCards(carriedCards.slice(1));
-
-        // console.log(startDeck);
-        // console.log(source.index);
-        // console.log('serial Indexs', getSerialIndexes(startDeck, source.index));
     }
 
     function onDragEnd(result) {
@@ -44,67 +41,6 @@ export default function App() {
 
         setInitialData(newInitialData);
 
-        // // Drag to undesirable area
-        // if (!destination) {
-        //     return;
-        // }
-
-        // // Drag to same deck
-        // if (destination.droppableId === source.droppableId) {
-        //     return;
-        // }
-
-        // const startDeck = initialData.decks[source.droppableId];
-        // const endDeck = initialData.decks[destination.droppableId];
-
-        // // Get draggable card
-        // const card = startDeck.cards.filter(
-        //     (card) => Number(card.id) === Number(draggableId)
-        // )[0];
-
-        // // Create new Start Deck
-        // const newStartCards = Array.from(startDeck.cards);
-        // const serialIndexes = getSerialIndexes(startDeck, source.index);
-        // // if(isDroppable(card, endDeck)) {
-        // newStartCards.splice(source.index, serialIndexes.length);
-
-        // // }
-        // const newStartDeck = {
-        //     ...startDeck,
-        //     cards: newStartCards,
-        // };
-
-        // // Carried cards
-        // const carriedCards = serialIndexes.map((index) => {
-        //     return startDeck.cards[index];
-        // });
-        // // setSelectedCards(carriedCards);
-        // // console.log('carried', carriedCards);
-
-        // // Create new End Deck
-        // const newEndCards = Array.from(endDeck.cards);
-        // console.log(isDroppable(card, endDeck));
-        // // if(isDroppable(card, endDeck)) {
-        // newEndCards.push(...carriedCards); // Add all cards to end of the deck
-        // // }
-        // const newEndDeck = {
-        //     ...endDeck,
-        //     cards: newEndCards,
-        // };
-
-        // const newInitialData = {
-        //     decks: {
-        //         ...initialData.decks,
-        //         [newStartDeck.id]: newStartDeck,
-        //         [newEndDeck.id]: newEndDeck,
-        //     },
-        // };
-
-
-
-        // console.log("new DATA => ", newInitialData);
-        // console.log("new start cards => ", newStartCards);
-        // console.log("new end cards => ", newEndCards);
     }
 
     return (

@@ -13,29 +13,13 @@ const BackFace = () => {
 };
 
 export default function Card({ card, index, deck, selectedCards }) {
-    // If it's once false it's always be false
-    const [isBackFace, setIsBackFace] = useState(true);
-    // console.log(card.isBackFace);
+    useEffect(() => {
+        console.log("open", deck.openCardCount);
+    }, []);
 
-    
-
-    // const isLastCard = +index === +deck.cards.length - 1;
-    // useEffect(() => {
-    //     if(isLastCard) {
-    //         setIsBackFace(false);
-    //     }
-        
-    // }, [])
-
-    // if (isBackFace) {
-        
-    //     return <BackFace></BackFace>;
-    // }
-
-    // if (!isLastCard) {
-        
-    //     return <BackFace></BackFace>;
-    // }
+    if (index < deck.cards.length - deck.openCardCount) {
+        return <BackFace></BackFace>;
+    }
 
     return (
         <Draggable

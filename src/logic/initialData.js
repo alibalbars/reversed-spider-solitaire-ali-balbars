@@ -62,14 +62,17 @@ export function getInitialData() {
 
     // Add 4 deck to initialData
     fourDecks.forEach((deck, index) => {
-        initialData.decks[deckIds[index]].cards = deck;
+        const currentDeck = initialData.decks[deckIds[index]];
+        currentDeck.cards = deck;
+        currentDeck.openCardCount = 1;
     });
 
     // Add 6 deck to initialData
     sixDecks.forEach((deck, index) => {
-        initialData.decks[deckIds[index + 4]].cards = deck;
+        const currentDeck = initialData.decks[deckIds[index + 4]];
+        currentDeck.cards = deck;
+        currentDeck.openCardCount = 1;
     });
-
     return initialData;
 }
 

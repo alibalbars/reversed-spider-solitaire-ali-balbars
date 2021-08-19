@@ -38,12 +38,8 @@ export function isSerial(array) {
 }
 
 export function getSerialRanks(deck, index) {
-    // console.log('in serial Deck', deck);
-    // console.log('in serial index', index);
 
     const cards = deck.cards;
-    // const card = deck.cards[index];
-    // const numericRank = getNumericRank(card.rank);
     let indexes = [index];
 
     // Get all indexes below selected card
@@ -66,11 +62,9 @@ export function getSerialRanks(deck, index) {
 
 export function isDraggable(deck, index) {
     return isSerial(getSerialRanks(deck, index));
-
 }
 
 export function getSerialIndexes(deck, index) {
-    console.log();
     const cards = deck.cards;
     let indexes = [index];
 
@@ -82,15 +76,15 @@ export function getSerialIndexes(deck, index) {
     return indexes;
 }
 
-export function isDroppable(card, deck) {
-    // Get draggable card rank 
+export function isDroppable(card, droppableDeck) {
+    // Get draggable card rank
     const cardRank = getNumericRank(card.rank);
 
     // Get the last card rank of the droppable deck
-    const lastCardOfDeck = deck.cards.slice(-1)[0];
+    const lastCardOfDeck = droppableDeck.cards.slice(-1)[0];
 
     // if deck is empty, allow to drag card
-    if(lastCardOfDeck === undefined) {
+    if (lastCardOfDeck === undefined) {
         return true;
     }
     const lastCardRank = getNumericRank(lastCardOfDeck.rank);
@@ -98,6 +92,7 @@ export function isDroppable(card, deck) {
     return isSerial([lastCardRank, cardRank]);
 }
 
+//TODO: Movecard() isDroppable içine alınacak.
 export function moveCard(destination, source, draggableId, initialData) {
     // Drag to undesirable area
     if (!destination) {
@@ -112,40 +107,29 @@ export function moveCard(destination, source, draggableId, initialData) {
     const startDeck = initialData.decks[source.droppableId];
     const endDeck = initialData.decks[destination.droppableId];
 
+    // Get serial card indexes of below selected card
+    const serialCardIndexes = getSerialIndexes(startDeck, source.index);
+
     // Get draggable card
-    const card = startDeck.cards.filter(
-        (card) => Number(card.id) === Number(draggableId)
-    )[0];
+    // const card = startDeck.cards.filter(
+    //     (card) => Number(card.id) === Number(draggableId)
+    // )[0];
 
-    // Create new Start Deck
-    const newStartCards = Array.from(startDeck.cards);
-    const serialIndexes = getSerialIndexes(startDeck, source.index);
-    // if(isDroppable(card, endDeck)) {
-    newStartCards.splice(source.index, serialIndexes.length);
-
-    // }
-    const newStartDeck = {
-        ...startDeck,
-        cards: newStartCards,
-    };
+    const selectedCard = getSelectedCard(startDeck, draggableId);
+    // console.log('card', card);
 
     // Carried cards
-    const carriedCards = serialIndexes.map((index) => {
+    const carriedCards = serialCardIndexes.map((index) => {
         return startDeck.cards[index];
     });
-    // setSelectedCards(carriedCards);
-    // console.log('carried', carriedCards);
 
-    // Create new End Deck
-    const newEndCards = Array.from(endDeck.cards);
-    // console.log(isDroppable(card, endDeck));
-    // if(isDroppable(card, endDeck)) {
-    newEndCards.push(...carriedCards); // Add all cards to end of the deck
-    // }
-    const newEndDeck = {
-        ...endDeck,
-        cards: newEndCards,
-    };
+    // Prevent unwanted moves
+    if(!isDroppable(selectedCard, endDeck)) {
+        return initialData;
+    }
+
+    const newStartDeck = getNewStartDeck(startDeck, source.index);
+    const newEndDeck = getNewEndDeck(endDeck, carriedCards, selectedCard);
 
     const newInitialData = {
         decks: {
@@ -155,12 +139,64 @@ export function moveCard(destination, source, draggableId, initialData) {
         },
     };
 
-    console.log('new', newInitialData);
-
     return newInitialData;
 }
 
-function arrangeCardsOpenStat(initialData) {
-    const decks = initialData.decks;
+function getNewStartDeck(startDeck, index) {
+    const serialCardIndexes = getSerialIndexes(startDeck, index);
 
+    // Create new Start Deck
+    const newStartCards = Array.from(startDeck.cards);
+    const startOpenCartCount = startDeck.openCardCount;
+    const newStartOpenCartCount = getOpenCardCount(
+        startOpenCartCount - serialCardIndexes.length
+    );
+
+    newStartCards.splice(index, serialCardIndexes.length);
+
+    const newStartDeck = {
+        ...startDeck,
+        cards: newStartCards,
+        openCardCount: newStartOpenCartCount,
+    };
+
+    return newStartDeck;
+}
+
+function getNewEndDeck(endDeck, carriedCards, selectedCard) {
+
+    // Create new End Deck
+    const newEndCards = Array.from(endDeck.cards);
+    const endOpenCartCount = endDeck.openCardCount;
+    const newEndOpenCartCount = getOpenCardCount(
+        endOpenCartCount + carriedCards.length
+    );
+    newEndCards.push(...carriedCards); // Add all cards to end of the deck
+    const newEndDeck = {
+        ...endDeck,
+        cards: newEndCards,
+        openCardCount: newEndOpenCartCount,
+    };
+
+    return newEndDeck;
+}
+
+function getOpenCardCount(count) {
+    if (count === undefined || count === null) {
+        throw new Error("Count argument is undefined or null");
+    }
+    if (count < 1) {
+        return 1;
+    }
+
+    return count;
+}
+
+function getSelectedCard(startDeck, draggableId) {
+    // Get draggable card
+    const card = startDeck.cards.filter(
+        (card) => Number(card.id) === Number(draggableId)
+    )[0];
+
+    return card;
 }
