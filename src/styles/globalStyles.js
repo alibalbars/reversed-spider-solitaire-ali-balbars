@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
 
     // Reset
     html, body {
-        font-size: 15px;
+        font-size: 13px;
         margin: 0;
         height: 100%;
         overflow: hidden;
@@ -20,6 +20,13 @@ const GlobalStyle = createGlobalStyle`
     }
 
     /* Media Queries */
+
+    // Very small devices
+    @media (max-width: ${VAR.VERY_SMALL}) { 
+        html {
+            font-size : 4px;
+        }
+    }
     // Very small devices
     @media (min-width: ${VAR.VERY_SMALL}) { 
         html {
@@ -44,14 +51,14 @@ const GlobalStyle = createGlobalStyle`
     // Large devices 
     @media (min-width: ${VAR.LARGE}) { 
         html {
-            font-size : 12px;
+            font-size : 10px;
         }
     }
 
     // Extra large devices
     @media (min-width: ${VAR.EXTRA}) { 
         html {
-            font-size : 15px;
+            font-size : 13px;
         }
     }
 

@@ -26,6 +26,7 @@ export const App = styled.div`
         rgba(57, 133, 192, 1)
     );
     height: 100vh;
+    position: relative;
 
 `;
 
@@ -34,9 +35,9 @@ export const Card = styled.div`
     display: inline-flex;
     flex-direction: column;
     width: ${VAR.CARD_WIDTH};
-    height: 10rem;
+    height: ${VAR.CARD_HEIGHT};
+    border-radius: ${VAR.CARD_BORDER_RADIUS};
     background-color: white;
-    border-radius: 10px;
     overflow: hidden;
     user-select: none;
     box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.49);

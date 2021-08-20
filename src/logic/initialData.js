@@ -56,9 +56,10 @@ export function getInitialData() {
 
     const deckIds = Object.keys(initialData.decks);
 
-    const fourDecks = deckData[0];
-    const sixDecks = deckData[1];
-    const remainingTenDecks = deckData[2];
+    const fourDecks = [...deckData[0]];
+    const sixDecks = [...deckData[1]];
+    const stockFiveDecks = [...deckData[2]]; // Total stock is 50 card
+    console.log('remaining', stockFiveDecks);   
 
     // Add 4 deck to initialData
     fourDecks.forEach((deck, index) => {
@@ -73,6 +74,10 @@ export function getInitialData() {
         currentDeck.cards = deck;
         currentDeck.openCardCount = 1;
     });
+
+    initialData.stockDecks = [...stockFiveDecks];
+
+    
     return initialData;
 }
 

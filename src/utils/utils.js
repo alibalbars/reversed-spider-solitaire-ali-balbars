@@ -133,6 +133,7 @@ export function moveCard(destination, source, draggableId, initialData) {
     const newEndDeck = getNewEndDeck(endDeck, carriedCards, selectedCard);
 
     const newInitialData = {
+        ...initialData,
         decks: {
             ...initialData.decks,
             [newStartDeck.id]: newStartDeck,
@@ -200,4 +201,8 @@ function getSelectedCard(startDeck, draggableId) {
     )[0];
 
     return card;
+}
+
+function isThereCompleteSerial(initialData) {
+
 }

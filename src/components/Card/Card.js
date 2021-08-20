@@ -13,8 +13,21 @@ const BackFace = () => {
 };
 
 export default function Card({ card, index, deck, selectedCards }) {
+    // const [isOpen, setIsOpen] = useState(false);
 
-    if (index < deck.cards.length - deck.openCardCount) {
+    // useEffect(() => {
+    //     if(index < deck.cards.length - deck.openCardCount) {
+    //         setIsOpen(true);
+    //     }
+        
+    // }, [])
+
+
+    // if ((index < deck.cards.length - deck.openCardCount) && !card.isStockCard) {
+    //     return <BackFace></BackFace>;
+    // }
+
+    if ((index < deck.cards.length - deck.openCardCount)) {
         return <BackFace></BackFace>;
     }
 
