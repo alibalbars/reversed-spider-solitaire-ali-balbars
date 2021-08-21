@@ -53,4 +53,6 @@ export const initialDataSkeleton = {
             openCardCount: []
         },
     },
+
+    completedDeckCount: 0,
 };

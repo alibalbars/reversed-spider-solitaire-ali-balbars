@@ -5,9 +5,15 @@ import * as VAR from "./variables";
 const GlobalStyle = createGlobalStyle`
 
     // Reset
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
     html, body {
         font-size: 13px;
-        margin: 0;
         height: 100%;
         overflow: hidden;
     }

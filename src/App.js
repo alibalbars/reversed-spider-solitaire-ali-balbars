@@ -3,10 +3,12 @@ import { DragDropContext } from "react-beautiful-dnd";
 import _initialData from "./logic/initialData.js";
 import Deck from "./components/Deck/Deck";
 import Stock from "./components/Stock/Stock";
+import CompletedDecks from "./components/CompletedDecks/CompletedDecks";
 import * as S from "./styles/styles";
-import { getSerialIndexes, moveCard } from "./utils/utils";
+import { getSerialIndexes, moveCard, isThereCompletedSerial } from "./utils/utils";
 import GlobalStyle from "./styles/globalStyles";
 import { InitialDataContext } from "./contexts/initialDataContext.js";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function App() {
     const [initialData, setInitialData] = useState(_initialData);
@@ -14,6 +16,7 @@ export default function App() {
 
     useEffect(() => {
         console.log("initialData", initialData);
+        
     }, []);
 
     // To make invisible the carried cards while dragging
@@ -23,10 +26,11 @@ export default function App() {
 
         const serialIndexes = getSerialIndexes(startDeck, source.index);
 
-        // Carried cards
+        // Dragging card + below it
         const carriedCards = serialIndexes.map((index) => {
             return startDeck.cards[index];
         });
+
         // Get only cards that below the dragging card
         setSelectedCards(carriedCards.slice(1));
     }
@@ -46,6 +50,7 @@ export default function App() {
         console.log("~ newInitialData", newInitialData)
 
         setInitialData(newInitialData);
+        isThereCompletedSerial(newInitialData);
         
     }
 
@@ -55,6 +60,8 @@ export default function App() {
 
             <InitialDataContext.Provider value={{initialData, setInitialData}}>
                 <S.App>
+                    {/* Requirement by react-hot-toast library*/}
+                <div><Toaster/></div>
                     <S.Decks>
                         {Object.keys(initialData.decks).map((deckId) => {
                             const deck = initialData.decks[deckId];
@@ -68,6 +75,7 @@ export default function App() {
                         })}
                     </S.Decks>
                     <Stock></Stock>
+                    {/* <CompletedDecks></CompletedDecks> */}
                 </S.App>
             </InitialDataContext.Provider>
         </DragDropContext>
@@ -82,6 +90,8 @@ export default function App() {
 //TODO: card objelerinde deck id'leri yanlış
 //TODO: rank'ların hepsini number yapabiliriz
 //TODO: getCarriedCards mettodu oluşturulabilir => ondrag start'ta kullanılıyor.
+//TODO: yarn lock git ignore edilecek
+//TODO: resimler webp olacak
 
 
 

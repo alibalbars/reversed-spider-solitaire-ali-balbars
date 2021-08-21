@@ -1,3 +1,8 @@
+import toast, { Toaster } from 'react-hot-toast';
+import * as _ from "lodash";
+
+const notify = () => toast('Here is your toast.');
+
 const letterRanks = {
     A: 1,
     J: 11,
@@ -38,7 +43,6 @@ export function isSerial(array) {
 }
 
 export function getSerialRanks(deck, index) {
-
     const cards = deck.cards;
     let indexes = [index];
 
@@ -96,7 +100,7 @@ export function isDroppable(card, droppableDeck) {
 export function moveCard(destination, source, draggableId, initialData) {
     // Drag to undesirable area
     if (!destination) {
-        console.log('geldi');
+        console.log("geldi");
         return initialData;
     }
 
@@ -111,13 +115,7 @@ export function moveCard(destination, source, draggableId, initialData) {
     // Get serial card indexes of below selected card
     const serialCardIndexes = getSerialIndexes(startDeck, source.index);
 
-    // Get draggable card
-    // const card = startDeck.cards.filter(
-    //     (card) => Number(card.id) === Number(draggableId)
-    // )[0];
-
     const selectedCard = getSelectedCard(startDeck, draggableId);
-    // console.log('card', card);
 
     // Carried cards
     const carriedCards = serialCardIndexes.map((index) => {
@@ -125,9 +123,9 @@ export function moveCard(destination, source, draggableId, initialData) {
     });
 
     // Prevent unwanted moves
-    if(!isDroppable(selectedCard, endDeck)) {
-        return initialData;
-    }
+    // if(!isDroppable(selectedCard, endDeck)) {
+    //     return initialData;
+    // }
 
     const newStartDeck = getNewStartDeck(startDeck, source.index);
     const newEndDeck = getNewEndDeck(endDeck, carriedCards, selectedCard);
@@ -144,12 +142,14 @@ export function moveCard(destination, source, draggableId, initialData) {
     return newInitialData;
 }
 
+// New start deck after card move
 function getNewStartDeck(startDeck, index) {
     const serialCardIndexes = getSerialIndexes(startDeck, index);
 
     // Create new Start Deck
     const newStartCards = Array.from(startDeck.cards);
     const startOpenCartCount = startDeck.openCardCount;
+
     const newStartOpenCartCount = getOpenCardCount(
         startOpenCartCount - serialCardIndexes.length
     );
@@ -161,32 +161,48 @@ function getNewStartDeck(startDeck, index) {
         cards: newStartCards,
         openCardCount: newStartOpenCartCount,
     };
+    // console.log("~ newStartDeck", newStartDeck.openCardCount);
+    // console.log("~ start length => ", newStartDeck.cards.length);
 
     return newStartDeck;
 }
 
-function getNewEndDeck(endDeck, carriedCards, selectedCard) {
+// New dropped deck after card move
+function getNewEndDeck(endDeck, carriedCards) {
+    const endOpenCartCount = endDeck.openCardCount;
 
     // Create new End Deck
     const newEndCards = Array.from(endDeck.cards);
-    const endOpenCartCount = endDeck.openCardCount;
-    const newEndOpenCartCount = getOpenCardCount(
-        endOpenCartCount + carriedCards.length
-    );
+
+    let newEndOpenCartCount;
+
     newEndCards.push(...carriedCards); // Add all cards to end of the deck
+
+    // If empty deck receives cards, arrange openCardCount as carriedCards count
+    if (endDeck.cards.length == 0) {
+        newEndOpenCartCount = carriedCards.length;
+    } else {
+        newEndOpenCartCount = getOpenCardCount(
+            endOpenCartCount + carriedCards.length
+        );
+    }
+
     const newEndDeck = {
         ...endDeck,
         cards: newEndCards,
         openCardCount: newEndOpenCartCount,
     };
+    console.log("~ newEndDeck", newEndDeck.openCardCount);
 
     return newEndDeck;
 }
 
+// Card count shouldn't be less then one if deck isn't empty
 function getOpenCardCount(count) {
     if (count === undefined || count === null) {
         throw new Error("Count argument is undefined or null");
     }
+
     if (count < 1) {
         return 1;
     }
@@ -203,6 +219,49 @@ function getSelectedCard(startDeck, draggableId) {
     return card;
 }
 
-function isThereCompleteSerial(initialData) {
+// Yeni deck'i döner
+function removeCompletedCards(deck) {
+    const openCardCount = deck.openCardCount;
+    deck.openCardCount = openCardCount - 13;
+    const newDeck = deck.cards.splice(deck.cards.length - 13) // TODO: tek satıra indirilecek
+    console.log("~ newDeck", newDeck)
 
+}
+
+function isDeckHasCompletedCards(deck) {
+    const checkArray = Array.from({ length: 13 }, (_, i) => i + 1); // [1, 2, ... , 13]
+    const cardNumericRanks = deck.cards.map((card) =>
+        getNumericRank(card.rank)
+    );
+
+    if (deck.openCardCount >= 13) {
+        const lastThirtheenCards = deck.cards.slice(-13);
+        const lastThirtheenCardsRanks = lastThirtheenCards.map((card) =>
+            getNumericRank(card.rank)
+        );
+        if (_.isEqual(checkArray, lastThirtheenCardsRanks)) {
+            // console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+            // removeCompletedCards(deck);
+            return true;
+        }
+
+        // console.log("~ lastThirtheenCardsRanks", lastThirtheenCardsRanks)
+        // console.log("~ lastThirtheenCards", lastThirtheenCards)
+        // console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+    }
+
+    return false;
+}
+
+// Yeni initialDatayı döner
+export function isThereCompletedSerial(initialData) {
+    Object.keys(initialData.decks).forEach((deckId) => {
+        const deck = initialData.decks[deckId];
+        if(isDeckHasCompletedCards(deck)) {
+            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+            removeCompletedCards(deck);
+            initialData.completedDeckCount += 1;
+            notify();
+        }
+    });
 }
