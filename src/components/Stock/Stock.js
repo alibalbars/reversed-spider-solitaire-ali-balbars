@@ -2,26 +2,30 @@ import React from "react";
 import * as Style from "./StockStyle";
 import { useContext } from "react";
 import { InitialDataContext } from "../../contexts/initialDataContext";
-import Card from "../Card/Card";
 import backFaceImg from "../../assets/img/backface.png";
+import * as GlobalStyle from "../../styles/globalStyles";
+import { getToastStyle } from "../../utils/utils";
 
-import toast, { Toaster } from "react-hot-toast";
-
-const notify = () => toast("Here is your toast.");
+import toast from "react-hot-toast";
 
 export default function Stock() {
     let { initialData, setInitialData } = useContext(InitialDataContext);
     const { stockDecks } = initialData;
 
     function deal() {
+        // If no stock deck, do anything
         if (stockDecks.length < 1) {
             return;
         }
-        toast(<Style.Toast>Cards added</Style.Toast>, {
-            duration: 4000,
+
+        // Make toast
+        toast(<GlobalStyle.Toast>Cards added</GlobalStyle.Toast>, {
+            duration: 3000,
             position: "bottom-center",
+            style: getToastStyle(),
             icon: "📌",
         });
+
         const currentStockCards = stockDecks.pop();
 
         // Get a copy of initialData.decks
@@ -51,8 +55,9 @@ export default function Stock() {
         // Change state
         setInitialData(newInitialData);
     }
+
     return (
-        <Style.Stock onClick={deal}>
+        <Style.Stock onClick={deal} deckCount={stockDecks.length}>
             {stockDecks.map((e, index) => {
                 return <img key={index} src={backFaceImg} />;
             })}

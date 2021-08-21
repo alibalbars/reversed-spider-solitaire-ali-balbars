@@ -75,7 +75,7 @@ export default function App() {
                         })}
                     </S.Decks>
                     <Stock></Stock>
-                    {/* <CompletedDecks></CompletedDecks> */}
+                    <CompletedDecks></CompletedDecks>
                 </S.App>
             </InitialDataContext.Provider>
         </DragDropContext>

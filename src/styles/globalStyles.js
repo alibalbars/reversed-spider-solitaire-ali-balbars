@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import fontOptien from "../assets/fonts/Optien.ttf";
 import * as VAR from "./variables";
@@ -71,3 +72,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default GlobalStyle;
+
+export const Toast = styled.div`
+    font-family: "optien";
+    font-size: 1.25rem;
+`;

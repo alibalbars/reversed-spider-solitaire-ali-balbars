@@ -1,7 +1,6 @@
-import toast, { Toaster } from 'react-hot-toast';
+import toast from "react-hot-toast";
 import * as _ from "lodash";
-
-const notify = () => toast('Here is your toast.');
+import * as GlobalStyle from "../styles/globalStyles"; // TODO: silinecek
 
 const letterRanks = {
     A: 1,
@@ -199,6 +198,7 @@ function getNewEndDeck(endDeck, carriedCards) {
 
 // Card count shouldn't be less then one if deck isn't empty
 function getOpenCardCount(count) {
+    return 20; // HACk :D
     if (count === undefined || count === null) {
         throw new Error("Count argument is undefined or null");
     }
@@ -223,9 +223,8 @@ function getSelectedCard(startDeck, draggableId) {
 function removeCompletedCards(deck) {
     const openCardCount = deck.openCardCount;
     deck.openCardCount = openCardCount - 13;
-    const newDeck = deck.cards.splice(deck.cards.length - 13) // TODO: tek satıra indirilecek
-    console.log("~ newDeck", newDeck)
-
+    const newDeck = deck.cards.splice(deck.cards.length - 13); // TODO: tek satıra indirilecek
+    console.log("~ newDeck", newDeck);
 }
 
 function isDeckHasCompletedCards(deck) {
@@ -253,15 +252,29 @@ function isDeckHasCompletedCards(deck) {
     return false;
 }
 
-// Yeni initialDatayı döner
-export function isThereCompletedSerial(initialData) {
+// Yeni initialDatayı döner //TODO: düzelt 
+export function isThereCompletedSerial(initialData) { //TODO: isim değişecek
     Object.keys(initialData.decks).forEach((deckId) => {
         const deck = initialData.decks[deckId];
-        if(isDeckHasCompletedCards(deck)) {
-            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+        if (isDeckHasCompletedCards(deck)) {
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             removeCompletedCards(deck);
             initialData.completedDeckCount += 1;
-            notify();
+
+            // Make toast
+            toast(<GlobalStyle.Toast>Cards Completed</GlobalStyle.Toast>, {
+                duration: 3000,
+                position: "bottom-center",
+                icon: "🙌",
+                style: getToastStyle(),
+            });
         }
     });
+}
+
+
+export function getToastStyle() {
+    return {
+        marginBottom: "50px",
+    }
 }

@@ -9,3 +9,5 @@ export const CARD_HEAD_HEIGHT = '2rem';
 export const CARD_WIDTH = '6.66rem';
 export const CARD_HEIGHT = '10rem';
 export const CARD_BORDER_RADIUS = '10px';
+
+
