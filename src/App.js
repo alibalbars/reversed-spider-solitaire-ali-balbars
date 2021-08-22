@@ -4,19 +4,25 @@ import _initialData from "./logic/initialData.js";
 import Deck from "./components/Deck/Deck";
 import Stock from "./components/Stock/Stock";
 import CompletedDecks from "./components/CompletedDecks/CompletedDecks";
-import * as S from "./styles/styles";
-import { getSerialIndexes, moveCard, isThereCompletedSerial } from "./utils/utils";
-import GlobalStyle from "./styles/globalStyles";
+import * as Style from "./styles/styles";
+import {
+    getSerialIndexes,
+    moveCard,
+    isThereCompletedSerial,
+} from "./utils/utils";
+import GlobalStyle from "./styles/GlobalStyles";
 import { InitialDataContext } from "./contexts/initialDataContext.js";
-import toast, { Toaster } from 'react-hot-toast';
+import { TimerContext } from "./contexts/timerContext.js";
+import toast, { Toaster } from "react-hot-toast";
+import Header from "./components/Header/Header";
 
 export default function App() {
     const [initialData, setInitialData] = useState(_initialData);
-    const [selectedCards, setSelectedCards] = useState([]); 
+    const [selectedCards, setSelectedCards] = useState([]);
+    const [timer, setTimer] = useState(0);
 
     useEffect(() => {
         console.log("initialData", initialData);
-        
     }, []);
 
     // To make invisible the carried cards while dragging
@@ -25,8 +31,9 @@ export default function App() {
         const startDeck = initialData.decks[source.droppableId]; // startDeck alınamamış
 
         const serialIndexes = getSerialIndexes(startDeck, source.index);
+        console.log("~ serialIndexes", serialIndexes)
 
-        // Dragging card + below it
+        // Selected card + cards below that
         const carriedCards = serialIndexes.map((index) => {
             return startDeck.cards[index];
         });
@@ -47,43 +54,53 @@ export default function App() {
             draggableId,
             initialData
         );
-        console.log("~ newInitialData", newInitialData)
+        console.log("~ newInitialData", newInitialData);
 
         setInitialData(newInitialData);
-        isThereCompletedSerial(newInitialData);
-        
+        isThereCompletedSerial(newInitialData); //TODO: ismi değişecek fonksiyonun
     }
 
     return (
         <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
             <GlobalStyle />
 
-            <InitialDataContext.Provider value={{initialData, setInitialData}}>
-                <S.App>
-                    {/* Requirement by react-hot-toast library*/}
-                <div><Toaster/></div>
-                    <S.Decks>
-                        {Object.keys(initialData.decks).map((deckId) => {
-                            const deck = initialData.decks[deckId];
-                            return (
-                                <Deck
-                                    key={deck.id}
-                                    deck={deck}
-                                    selectedCards={selectedCards}
-                                />
-                            );
-                        })}
-                    </S.Decks>
-                    <Stock></Stock>
-                    <CompletedDecks></CompletedDecks>
-                </S.App>
+            <InitialDataContext.Provider
+                value={{ initialData, setInitialData }}
+            >
+                <TimerContext.Provider value={{timer, setTimer}}>
+                    <Style.App>
+                        {/* Requirement by react-hot-toast library*/}
+                        <div>
+                            <Toaster />
+                        </div>
+    
+                        <Header></Header>
+                        <Style.Decks>
+                            {Object.keys(initialData.decks).map((deckId) => {
+                                const deck = initialData.decks[deckId];
+                                return (
+                                    <Deck
+                                        key={deck.id}
+                                        deck={deck}
+                                        selectedCards={selectedCards}
+                                    />
+                                );
+                            })}
+                        </Style.Decks>
+                        <Stock></Stock>
+                        <CompletedDecks></CompletedDecks>
+                    </Style.App>
+                </TimerContext.Provider>
             </InitialDataContext.Provider>
         </DragDropContext>
     );
 }
-
+//TODO: oyun kazanıldığında modal göster
+//Metodlar iş yapmak yerine bir değer dönerse test daha kolay olur ??
 //TODO: S' ler Style yapılacak
 //TODO: Initial data'nın adı current data olarak değiştirilebilir. (gameData'da olabilir.)
+//TODO: Moves counter eklenebilir.
+//TODO: fonk'lara undefined kontrolü getirilecek.
 
 //TODO: initialData için context API kullanılabilir.
 //TODO: eslint eklenecek
@@ -92,14 +109,7 @@ export default function App() {
 //TODO: getCarriedCards mettodu oluşturulabilir => ondrag start'ta kullanılıyor.
 //TODO: yarn lock git ignore edilecek
 //TODO: resimler webp olacak
-
-
-
-// Tüm kart id lerini göstermek için
-// Object.keys(initialData.decks).map((deckId) => {
-//     const deck = initialData.decks[deckId];
-//     cards.push(deck.cards);
-// });
-// const idArray = cards.flat().map((e) => e.id);
-// const uniq = [...new Set(idArray)];
-// console.log("cards", uniq);
+//TODO: styles.js ismi değişecek
+//TODO: styles.js componentlere ayrılacak
+//TODO: SerialIndex's ismi değişebilir, seçili kart ve altındaki kartlar
+//TODO: favicon ve uygulama adı değişecek

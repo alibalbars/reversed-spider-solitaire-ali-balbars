@@ -18,17 +18,13 @@ function generateCards() {
 
         // There is 13 rank, for two deck 13 * 8 = 104 cards
         for (let i = 1; i <= 8; i++) {
-            //TODO: delete =>  8 tane A kartı olması gerek örneğin
-
             cards.push({
                 id: idCounter,
                 rank: rank,
                 suit: "spade",
-                // isBackFace: true,
                 isOpen: true,
                 deck: i,
             });
-            // console.log(idCounter);
             idCounter = idCounter + 1;
         }
     });
@@ -59,7 +55,6 @@ export function getInitialData() {
     const fourDecks = [...deckData[0]];
     const sixDecks = [...deckData[1]];
     const stockFiveDecks = [...deckData[2]]; // Total stock is 50 card
-    console.log('remaining', stockFiveDecks);   
 
     // Add 4 deck to initialData
     fourDecks.forEach((deck, index) => {
@@ -76,12 +71,8 @@ export function getInitialData() {
     });
 
     initialData.stockDecks = [...stockFiveDecks];
-
-    
     return initialData;
 }
-
-
 
 const data = getInitialData();
 export default data;

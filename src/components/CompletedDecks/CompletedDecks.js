@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { InitialDataContext } from "../../contexts/initialDataContext";
 import * as Style from "./CompletedDecksStyle";
-import BackFaceImg from "../../assets/img/backface.png";
+import BackFaceImg from "../../assets/img/backface.webp";
 
 export default function CompletedDecks() {
     const { initialData } = useContext(InitialDataContext);

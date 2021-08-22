@@ -2,8 +2,8 @@ import React from "react";
 import * as Style from "./StockStyle";
 import { useContext } from "react";
 import { InitialDataContext } from "../../contexts/initialDataContext";
-import backFaceImg from "../../assets/img/backface.png";
-import * as GlobalStyle from "../../styles/globalStyles";
+import backFaceImg from "../../assets/img/backface.webp";
+import * as GlobalStyle from "../../styles/GlobalStyles";
 import { getToastStyle } from "../../utils/utils";
 
 import toast from "react-hot-toast";

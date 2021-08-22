@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import * as S from "../../styles/styles";
+import * as Style from "../../styles/styles";
 import { Draggable } from "react-beautiful-dnd";
 import { isDraggable } from "../../utils/utils";
-import backFaceImg from "../../assets/img/backface.png";
+import backFaceImg from "../../assets/img/backface.webp";
 
 const BackFace = () => {
     return (
-        <S.Card>
+        <Style.Card>
             <img src={backFaceImg} alt="Card backface image"></img>
-        </S.Card>
+        </Style.Card>
     );
 };
 
@@ -38,7 +38,7 @@ export default function Card({ card, index, deck, selectedCards }) {
             isDragDisabled={!isDraggable(deck, index)}
         >
             {(provided, snapshot) => (
-                <S.Card
+                <Style.Card
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
@@ -59,14 +59,14 @@ export default function Card({ card, index, deck, selectedCards }) {
                     }}
                     isDragging={snapshot.isDragging}
                 >
-                    <S.CardHead>
+                    <Style.CardHead>
                         <span>{card.rank}</span>
                         <span>♠</span>
-                    </S.CardHead>
-                    <S.CardBody>
+                    </Style.CardHead>
+                    <Style.CardBody>
                         <span className="main-letter">{card.rank}</span>
-                    </S.CardBody>
-                </S.Card>
+                    </Style.CardBody>
+                </Style.Card>
             )}
         </Draggable>
     );

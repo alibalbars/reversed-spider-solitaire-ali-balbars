@@ -55,4 +55,7 @@ export const initialDataSkeleton = {
     },
 
     completedDeckCount: 0,
+    score: 500,
+    winCount: 0,
+    timeCounter: 0,
 };

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import * as _ from "lodash";
-import * as GlobalStyle from "../styles/globalStyles"; // TODO: silinecek
+import * as GlobalStyle from "../styles/GlobalStyles"; // TODO: silinecek
 
 const letterRanks = {
     A: 1,
@@ -95,11 +95,9 @@ export function isDroppable(card, droppableDeck) {
     return isSerial([lastCardRank, cardRank]);
 }
 
-//TODO: Movecard() isDroppable içine alınacak.
 export function moveCard(destination, source, draggableId, initialData) {
-    // Drag to undesirable area
+    // Drag to an unwanted area
     if (!destination) {
-        console.log("geldi");
         return initialData;
     }
 
@@ -107,6 +105,7 @@ export function moveCard(destination, source, draggableId, initialData) {
     if (destination.droppableId === source.droppableId) {
         return initialData;
     }
+
 
     const startDeck = initialData.decks[source.droppableId];
     const endDeck = initialData.decks[destination.droppableId];
@@ -121,13 +120,15 @@ export function moveCard(destination, source, draggableId, initialData) {
         return startDeck.cards[index];
     });
 
-    // Prevent unwanted moves
+    // Prevent unwanted moves //TODO: HACK
     // if(!isDroppable(selectedCard, endDeck)) {
     //     return initialData;
     // }
 
+    // Get changed two new decks
     const newStartDeck = getNewStartDeck(startDeck, source.index);
     const newEndDeck = getNewEndDeck(endDeck, carriedCards, selectedCard);
+
 
     const newInitialData = {
         ...initialData,
@@ -138,7 +139,14 @@ export function moveCard(destination, source, draggableId, initialData) {
         },
     };
 
+    changeScore(newInitialData, -1)
+
     return newInitialData;
+}
+
+// Changes game score
+function changeScore(initialData, num) {
+    initialData.score = initialData.score + num;
 }
 
 // New start deck after card move
@@ -160,8 +168,6 @@ function getNewStartDeck(startDeck, index) {
         cards: newStartCards,
         openCardCount: newStartOpenCartCount,
     };
-    // console.log("~ newStartDeck", newStartDeck.openCardCount);
-    // console.log("~ start length => ", newStartDeck.cards.length);
 
     return newStartDeck;
 }
@@ -198,7 +204,7 @@ function getNewEndDeck(endDeck, carriedCards) {
 
 // Card count shouldn't be less then one if deck isn't empty
 function getOpenCardCount(count) {
-    return 20; // HACk :D
+    return 20; // hack :D
     if (count === undefined || count === null) {
         throw new Error("Count argument is undefined or null");
     }
@@ -221,17 +227,17 @@ function getSelectedCard(startDeck, draggableId) {
 
 // Yeni deck'i döner
 function removeCompletedCards(deck) {
+    
+    // decrease 13 from openCardCount
     const openCardCount = deck.openCardCount;
     deck.openCardCount = openCardCount - 13;
-    const newDeck = deck.cards.splice(deck.cards.length - 13); // TODO: tek satıra indirilecek
-    console.log("~ newDeck", newDeck);
+
+    // remove last 13 cards from deck
+    deck.cards.splice(deck.cards.length - 13);
 }
 
 function isDeckHasCompletedCards(deck) {
     const checkArray = Array.from({ length: 13 }, (_, i) => i + 1); // [1, 2, ... , 13]
-    const cardNumericRanks = deck.cards.map((card) =>
-        getNumericRank(card.rank)
-    );
 
     if (deck.openCardCount >= 13) {
         const lastThirtheenCards = deck.cards.slice(-13);
@@ -239,14 +245,8 @@ function isDeckHasCompletedCards(deck) {
             getNumericRank(card.rank)
         );
         if (_.isEqual(checkArray, lastThirtheenCardsRanks)) {
-            // console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-            // removeCompletedCards(deck);
             return true;
         }
-
-        // console.log("~ lastThirtheenCardsRanks", lastThirtheenCardsRanks)
-        // console.log("~ lastThirtheenCards", lastThirtheenCards)
-        // console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
     }
 
     return false;
@@ -255,10 +255,18 @@ function isDeckHasCompletedCards(deck) {
 // Yeni initialDatayı döner //TODO: düzelt 
 export function isThereCompletedSerial(initialData) { //TODO: isim değişecek
     Object.keys(initialData.decks).forEach((deckId) => {
+        // Get deck
         const deck = initialData.decks[deckId];
+
+        // if deck has [1, 2, ... , J, Q, K] cards
         if (isDeckHasCompletedCards(deck)) {
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            // Remove completed cards
             removeCompletedCards(deck);
+
+            // Increase score
+            changeScore(initialData, 100);
+
+            // Increase completedDeckCount
             initialData.completedDeckCount += 1;
 
             // Make toast
@@ -277,4 +285,32 @@ export function getToastStyle() {
     return {
         marginBottom: "50px",
     }
+}
+
+// seconds to time string [for clock component]
+export function secsToTimeString(secs) {
+    secs = Math.round(secs);
+    let hours = Math.floor(secs / (60 * 60));
+
+    let divisorForMinutes = secs % (60 * 60);
+    let minutes = Math.floor(divisorForMinutes / 60);
+
+    let divisorForSeconds = divisorForMinutes % 60;
+    let seconds = Math.ceil(divisorForSeconds);
+    
+    const secondsStr = makeNumberTwoDigitString(seconds);
+    const minutesStr = makeNumberTwoDigitString(minutes);
+    const hoursStr = makeNumberTwoDigitString(hours);
+
+    return `${hoursStr}:${minutesStr}:${secondsStr}`;
+}
+
+
+function makeNumberTwoDigitString(num) {
+    let numStr = num.toString();
+
+    if(numStr.length < 2) {
+        return `0${numStr}`;
+    }
+    return numStr;
 }

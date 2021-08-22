@@ -75,5 +75,5 @@ export default GlobalStyle;
 
 export const Toast = styled.div`
     font-family: "optien";
-    font-size: 1.25rem;
+    font-size: 1.45rem;
 `;

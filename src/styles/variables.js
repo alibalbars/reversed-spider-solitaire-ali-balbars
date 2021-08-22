@@ -11,3 +11,6 @@ export const CARD_HEIGHT = '10rem';
 export const CARD_BORDER_RADIUS = '10px';
 
 
+export const HEADER_ICON_HEIGHT = '25px';
+
+
