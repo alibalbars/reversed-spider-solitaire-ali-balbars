@@ -32,16 +32,8 @@ export const Header = styled.div`
     }
 `;
 
-
-
 export const Text = styled.div`
     display: inline-block;
 
     
-`;
-
-export const IconGroup = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
 `;

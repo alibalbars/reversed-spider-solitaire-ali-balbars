@@ -3,11 +3,10 @@ import { InitialDataContext } from "../../contexts/initialDataContext";
 import { TimerContext } from "../../contexts/timerContext";
 import * as Style from "./ClockStyle";
 import * as SharedStyle from "../../styles/_Shared";
-import { secsToTimeString } from "../../utils/utils";
+import { secsToTimeString } from "../../utils/timeUtils";
 
 export default function Clock() {
     const { timer, setTimer } = useContext(TimerContext);
-    console.log("~ timer", timer);
 
     useEffect(() => {
         const interval = setInterval(() => {

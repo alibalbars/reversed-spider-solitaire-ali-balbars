@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import * as _ from "lodash";
 import * as GlobalStyle from "../styles/GlobalStyles"; // TODO: silinecek
+import { getInitialData } from "../logic/initialData.js";
 
 const letterRanks = {
     A: 1,
@@ -106,7 +107,6 @@ export function moveCard(destination, source, draggableId, initialData) {
         return initialData;
     }
 
-
     const startDeck = initialData.decks[source.droppableId];
     const endDeck = initialData.decks[destination.droppableId];
 
@@ -129,7 +129,6 @@ export function moveCard(destination, source, draggableId, initialData) {
     const newStartDeck = getNewStartDeck(startDeck, source.index);
     const newEndDeck = getNewEndDeck(endDeck, carriedCards, selectedCard);
 
-
     const newInitialData = {
         ...initialData,
         decks: {
@@ -139,7 +138,7 @@ export function moveCard(destination, source, draggableId, initialData) {
         },
     };
 
-    changeScore(newInitialData, -1)
+    changeScore(newInitialData, -1);
 
     return newInitialData;
 }
@@ -197,7 +196,6 @@ function getNewEndDeck(endDeck, carriedCards) {
         cards: newEndCards,
         openCardCount: newEndOpenCartCount,
     };
-    console.log("~ newEndDeck", newEndDeck.openCardCount);
 
     return newEndDeck;
 }
@@ -227,7 +225,6 @@ function getSelectedCard(startDeck, draggableId) {
 
 // Yeni deck'i döner
 function removeCompletedCards(deck) {
-    
     // decrease 13 from openCardCount
     const openCardCount = deck.openCardCount;
     deck.openCardCount = openCardCount - 13;
@@ -252,8 +249,9 @@ function isDeckHasCompletedCards(deck) {
     return false;
 }
 
-// Yeni initialDatayı döner //TODO: düzelt 
-export function isThereCompletedSerial(initialData) { //TODO: isim değişecek
+// Yeni initialDatayı döner //TODO: düzelt
+export function isThereCompletedSerial(initialData) {
+    //TODO: isim değişecek
     Object.keys(initialData.decks).forEach((deckId) => {
         // Get deck
         const deck = initialData.decks[deckId];
@@ -280,37 +278,26 @@ export function isThereCompletedSerial(initialData) { //TODO: isim değişecek
     });
 }
 
+export function isGameOver(initialData) {
+    if (initialData.completedDeckCount === 8) {
+        return true;
+    }
+    return false;
+}
 
 export function getToastStyle() {
     return {
         marginBottom: "50px",
-    }
+    };
 }
 
-// seconds to time string [for clock component]
-export function secsToTimeString(secs) {
-    secs = Math.round(secs);
-    let hours = Math.floor(secs / (60 * 60));
+export function restartGame(setInitialData, setTimer) {
+    // set newInitialData
+    const newInitialData = getInitialData();
+    setInitialData(newInitialData);
 
-    let divisorForMinutes = secs % (60 * 60);
-    let minutes = Math.floor(divisorForMinutes / 60);
+    // set Timer to 0
+    setTimer(0);
 
-    let divisorForSeconds = divisorForMinutes % 60;
-    let seconds = Math.ceil(divisorForSeconds);
-    
-    const secondsStr = makeNumberTwoDigitString(seconds);
-    const minutesStr = makeNumberTwoDigitString(minutes);
-    const hoursStr = makeNumberTwoDigitString(hours);
-
-    return `${hoursStr}:${minutesStr}:${secondsStr}`;
-}
-
-
-function makeNumberTwoDigitString(num) {
-    let numStr = num.toString();
-
-    if(numStr.length < 2) {
-        return `0${numStr}`;
-    }
-    return numStr;
+    console.log("~ _initialData", getInitialData());
 }

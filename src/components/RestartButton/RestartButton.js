@@ -5,24 +5,15 @@ import * as Style from "./RestartButtonStyle";
 import * as SharedStyle from "../../styles/_Shared";
 import toast from "react-hot-toast";
 import * as GlobalStyle from "../../styles/GlobalStyles";
-import { getToastStyle } from "../../utils/utils";
-import { getInitialData } from "../../logic/initialData.js";
+import { restartGame, getToastStyle } from "../../utils/utils";
 
 
 export default function RestartButton(props) {
     const { setInitialData } = useContext(InitialDataContext);
     const { timer, setTimer } = useContext(TimerContext);
 
-    console.log('RESTART BUTTON');
     function handleClick() {
-        // set newInitialData
-        const newInitialData = getInitialData();
-        setInitialData(newInitialData);
-
-        // set Timer to 0
-        setTimer(0);
-        
-        console.log("~ _initialData", getInitialData())
+        restartGame(setInitialData, setTimer);
 
         toast(<GlobalStyle.Toast>Restarted</GlobalStyle.Toast>, {
             duration: 3000,

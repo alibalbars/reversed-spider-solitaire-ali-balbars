@@ -9,17 +9,25 @@ import {
     getSerialIndexes,
     moveCard,
     isThereCompletedSerial,
+    isGameOver,
 } from "./utils/utils";
 import GlobalStyle from "./styles/GlobalStyles";
 import { InitialDataContext } from "./contexts/initialDataContext.js";
 import { TimerContext } from "./contexts/timerContext.js";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import Header from "./components/Header/Header";
+import Modal from "./components/GameOverModal/GameOverModal";
+import { initial } from "lodash";
 
 export default function App() {
     const [initialData, setInitialData] = useState(_initialData);
     const [selectedCards, setSelectedCards] = useState([]);
     const [timer, setTimer] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // const interval = setTimeout(() => {
+    //     setIsModalOpen(true);
+    // }, 1500);
 
     useEffect(() => {
         console.log("initialData", initialData);
@@ -30,8 +38,8 @@ export default function App() {
         const { source, draggableId } = start;
         const startDeck = initialData.decks[source.droppableId]; // startDeck alınamamış
 
+        // Get card indexes from deck that are in serial order
         const serialIndexes = getSerialIndexes(startDeck, source.index);
-        console.log("~ serialIndexes", serialIndexes)
 
         // Selected card + cards below that
         const carriedCards = serialIndexes.map((index) => {
@@ -58,6 +66,11 @@ export default function App() {
 
         setInitialData(newInitialData);
         isThereCompletedSerial(newInitialData); //TODO: ismi değişecek fonksiyonun
+        // if(isGameOver(initialData)) {
+        //     console.log('GAME IS OVER!!!');
+        // }
+        console.log(isGameOver(newInitialData));
+        setIsModalOpen(true);
     }
 
     return (
@@ -67,13 +80,15 @@ export default function App() {
             <InitialDataContext.Provider
                 value={{ initialData, setInitialData }}
             >
-                <TimerContext.Provider value={{timer, setTimer}}>
+                <TimerContext.Provider value={{ timer, setTimer }}>
                     <Style.App>
                         {/* Requirement by react-hot-toast library*/}
                         <div>
                             <Toaster />
                         </div>
-    
+
+                        <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen}></Modal>
+
                         <Header></Header>
                         <Style.Decks>
                             {Object.keys(initialData.decks).map((deckId) => {
@@ -113,3 +128,4 @@ export default function App() {
 //TODO: styles.js componentlere ayrılacak
 //TODO: SerialIndex's ismi değişebilir, seçili kart ve altındaki kartlar
 //TODO: favicon ve uygulama adı değişecek
+//TODO: en son console.log'lar ve gereksiz yorum satırları silinecek.

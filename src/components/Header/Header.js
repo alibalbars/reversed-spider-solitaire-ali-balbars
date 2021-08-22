@@ -16,15 +16,15 @@ export default function Header() {
     return (
         <Style.Header>
             <div className="stats">
-                <Style.IconGroup>
+                <SharedStyle.IconGroup>
                     <img src={clockIcon} height={VAR.HEADER_ICON_HEIGHT} />
                     <Clock></Clock>
-                </Style.IconGroup>
+                </SharedStyle.IconGroup>
 
-                <Style.IconGroup>
+                <SharedStyle.IconGroup>
                     <img src={trophyIcon} height={VAR.HEADER_ICON_HEIGHT} />
                     <SharedStyle.NumberBox>{winCount}</SharedStyle.NumberBox>
-                </Style.IconGroup>
+                </SharedStyle.IconGroup>
             </div>
 
             <Style.Text>Highest Score Ever: {score} </Style.Text>
