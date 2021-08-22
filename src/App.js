@@ -11,23 +11,19 @@ import {
     isThereCompletedSerial,
     isGameOver,
 } from "./utils/utils";
+// import GlobalStyle from "./styles/GlobalStyles";
 import GlobalStyle from "./styles/GlobalStyles";
 import { InitialDataContext } from "./contexts/initialDataContext.js";
 import { TimerContext } from "./contexts/timerContext.js";
 import { Toaster } from "react-hot-toast";
 import Header from "./components/Header/Header";
 import Modal from "./components/GameOverModal/GameOverModal";
-import { initial } from "lodash";
 
 export default function App() {
     const [initialData, setInitialData] = useState(_initialData);
     const [selectedCards, setSelectedCards] = useState([]);
     const [timer, setTimer] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // const interval = setTimeout(() => {
-    //     setIsModalOpen(true);
-    // }, 1500);
 
     useEffect(() => {
         console.log("initialData", initialData);
