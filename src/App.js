@@ -26,6 +26,7 @@ export default function App() {
 
     useEffect(() => {
         console.log("initialData", initialData);
+        // setOldDatas([_initialData])
     }, []);
 
     // To make invisible the carried cards while dragging
@@ -59,16 +60,16 @@ export default function App() {
         );
         console.log("~ newInitialData", newInitialData);
 
-
-
         setInitialData(newInitialData);
+
+
+        console.log("~ initialData", initialData);
+
+
         isThereCompletedSerial(newInitialData); //TODO: ismi değişecek fonksiyonun
-        // if(isGameOver(initialData)) {
-        //     console.log('GAME IS OVER!!!');
-        // }
+
         console.log(isGameOver(newInitialData));
-        if(isGameOver(newInitialData)) {
-            console.log('OYUN BİTTİ!!!!!!!!!!!!!');
+        if (isGameOver(newInitialData)) {
             newInitialData.winCount += 1;
             setIsModalOpen(true);
         }
@@ -89,7 +90,10 @@ export default function App() {
                             <Toaster />
                         </div>
 
-                        <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen}></Modal>
+                        <Modal
+                            isOpen={isModalOpen}
+                            setIsModalOpen={setIsModalOpen}
+                        ></Modal>
 
                         <Header></Header>
                         <Style.Decks>

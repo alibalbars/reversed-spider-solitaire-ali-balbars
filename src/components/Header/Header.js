@@ -17,12 +17,20 @@ export default function Header() {
         <Style.Header>
             <div className="stats">
                 <SharedStyle.IconGroup>
-                    <img src={clockIcon} height={VAR.HEADER_ICON_HEIGHT} alt="clockIcon"/>
+                    <img
+                        src={clockIcon}
+                        height={VAR.HEADER_ICON_HEIGHT}
+                        alt="clockIcon"
+                    />
                     <Clock></Clock>
                 </SharedStyle.IconGroup>
 
                 <SharedStyle.IconGroup>
-                    <img src={trophyIcon} height={VAR.HEADER_ICON_HEIGHT} alt="trophyIcon"/>
+                    <img
+                        src={trophyIcon}
+                        height={VAR.HEADER_ICON_HEIGHT}
+                        alt="trophyIcon"
+                    />
                     <SharedStyle.NumberBox>{winCount}</SharedStyle.NumberBox>
                 </SharedStyle.IconGroup>
             </div>
@@ -30,8 +38,13 @@ export default function Header() {
             <Style.Text>Score: {score}</Style.Text>
 
             <RestartButton>
-                <img src={restartIcon} height={VAR.HEADER_ICON_HEIGHT} alt="restartIcon"/>
+                <img
+                    src={restartIcon}
+                    height={VAR.HEADER_ICON_HEIGHT}
+                    alt="restartIcon"
+                />
             </RestartButton>
         </Style.Header>
     );
 }
+
