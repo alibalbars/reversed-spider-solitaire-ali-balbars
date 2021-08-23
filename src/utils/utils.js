@@ -244,7 +244,7 @@ export function getSelectedCard(startDeck, draggableId) {
 export function removeCompletedCards(deck) {
     // decrease 13 from openCardCount
     const openCardCount = deck.openCardCount;
-    deck.openCardCount = openCardCount - 13;
+    deck.openCardCount = openCardCount - 12;
 
     // remove last 13 cards from deck
     deck.cards.splice(deck.cards.length - 13);
