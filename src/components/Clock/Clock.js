@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { InitialDataContext } from "../../contexts/initialDataContext";
+import React, { useEffect, useContext } from "react";
 import { TimerContext } from "../../contexts/timerContext";
 import * as Style from "./clockStyle";
 import * as SharedStyle from "../../styles/_shared";

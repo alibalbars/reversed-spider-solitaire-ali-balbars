@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import * as VAR from "../../styles/variables";
 
 export const Header = styled.div`
     height: 35px;

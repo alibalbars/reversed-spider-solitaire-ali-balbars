@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import RestartButton from "../RestartButton/RestartButton";
 import { TimerContext } from "../../contexts/timerContext";
 import * as Style from "./gameOverModalStyle";
@@ -55,7 +55,7 @@ function GameOverModal(props) {
 // To avoid re-render create external component
 function TimeString() {
     const { timer } = useContext(TimerContext);
-    const [myTimer, setMyTimer] = useState(timer);
+    const [myTimer] = useState(timer);
 
     return <span>{secsToTimeString(myTimer)}</span>;
 }

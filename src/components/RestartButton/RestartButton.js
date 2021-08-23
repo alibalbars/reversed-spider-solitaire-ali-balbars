@@ -10,7 +10,7 @@ import { restartGame, getToastStyle } from "../../utils/utils";
 
 export default function RestartButton(props) {
     const { initialData, setInitialData } = useContext(InitialDataContext);
-    const { timer, setTimer } = useContext(TimerContext);
+    const { setTimer } = useContext(TimerContext);
 
     function handleClick() {
         restartGame(initialData, setInitialData, setTimer);

@@ -30,8 +30,8 @@ export default function App() {
 
     // To make invisible the carried cards while dragging
     function onDragStart(start) {
-        const { source, draggableId } = start;
-        const startDeck = initialData.decks[source.droppableId]; // startDeck alınamamış
+        const { source } = start;
+        const startDeck = initialData.decks[source.droppableId];
 
         // Get card indexes from deck that are in serial order
         const serialIndexes = getSerialIndexes(startDeck, source.index);

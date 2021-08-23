@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { InitialDataContext } from "../../contexts/initialDataContext";
 import Clock from "../Clock/Clock";
 import RestartButton from "../RestartButton/RestartButton";

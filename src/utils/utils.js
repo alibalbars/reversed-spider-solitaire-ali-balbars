@@ -202,16 +202,17 @@ function getNewEndDeck(endDeck, carriedCards) {
 
 // Card count shouldn't be less then one if deck isn't empty
 function getOpenCardCount(count) {
+    console.log(count); // TODO: sil
     return 20; // hack :D
-    if (count === undefined || count === null) {
-        throw new Error("Count argument is undefined or null");
-    }
+    // if (count === undefined || count === null) {
+    //     throw new Error("Count argument is undefined or null");
+    // }
 
-    if (count < 1) {
-        return 1;
-    }
+    // if (count < 1) {
+    //     return 1;
+    // }
 
-    return count;
+    // return count;
 }
 
 function getSelectedCard(startDeck, draggableId) {

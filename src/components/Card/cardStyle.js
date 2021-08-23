@@ -37,7 +37,7 @@ span {
 `;
 
 // If card is in a selected serial, make it display:none when dragging
-export function getDisplayStyle(style, selectedCards, card, snapshot) {
+export function getDisplayStyle(style, selectedCards, card) {
     if (selectedCards.includes(card)) {
         // Dragging iken buraya girer
         return {

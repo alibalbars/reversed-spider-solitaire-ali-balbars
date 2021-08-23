@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as Style from "./cardStyle";
 import { Draggable } from "react-beautiful-dnd";
 import { isDraggable } from "../../utils/utils";
@@ -7,7 +7,7 @@ import backFaceImg from "../../assets/img/backface.webp";
 const BackFace = () => {
     return (
         <Style.Card>
-            <img src={backFaceImg} alt="Card backface image" alt="Card backface image"/>
+            <img src={backFaceImg} alt="Card backface image"/>
         </Style.Card>
     );
 };

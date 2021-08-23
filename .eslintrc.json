@@ -3,16 +3,27 @@
         "browser": true,
         "es2021": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 6
+        "requireConfigFile": false,
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        },
+        "babelOptions": {
+            "presets": ["@babel/preset-react"]
+        }
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react"],
     "rules": {
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/prop-types": "off",
+        "arrow-body-style": 0,
+        "react/jsx-props-no-spreading": "off",
+        "import/prefer-default-export": 0,
+        "react/no-array-index-key": 0,
+        "react/react-in-jsx-scope": "off"
     }
 }
