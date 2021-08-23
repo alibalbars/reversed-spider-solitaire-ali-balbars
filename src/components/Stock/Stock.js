@@ -1,9 +1,9 @@
 import React from "react";
-import * as Style from "./StockStyle";
+import * as Style from "./stockStyle";
 import { useContext } from "react";
 import { InitialDataContext } from "../../contexts/initialDataContext";
 import backFaceImg from "../../assets/img/backface.webp";
-import * as GlobalStyle from "../../styles/GlobalStyles";
+import * as GlobalStyle from "../../styles/globalStyles";
 import { getToastStyle } from "../../utils/utils";
 
 import toast from "react-hot-toast";
@@ -19,7 +19,7 @@ export default function Stock() {
         }
 
         // Make toast
-        toast(<GlobalStyle.Toast>Cards added</GlobalStyle.Toast>, {
+        toast(<GlobalStyle.Toast>Cards dealed!</GlobalStyle.Toast>, {
             duration: 3000,
             position: "bottom-center",
             style: getToastStyle(),
@@ -59,7 +59,7 @@ export default function Stock() {
     return (
         <Style.Stock onClick={deal} deckCount={stockDecks.length}>
             {stockDecks.map((e, index) => {
-                return <img key={index} src={backFaceImg} />;
+                return <img key={index} src={backFaceImg} alt="Card backface image"/>;
             })}
         </Style.Stock>
     );

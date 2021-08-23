@@ -12,5 +12,6 @@ export const CARD_BORDER_RADIUS = '10px';
 
 
 export const HEADER_ICON_HEIGHT = '25px';
+export const SECTION_BOTTOM_PADDING = '2rem';
 
 

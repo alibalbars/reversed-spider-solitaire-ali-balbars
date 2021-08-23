@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import * as _ from "lodash";
-import * as GlobalStyle from "../styles/GlobalStyles"; // TODO: silinecek
+import * as GlobalStyle from "../styles/globalStyles"; // TODO: silinecek
 import { getInitialData } from "../logic/initialData.js";
 
 const letterRanks = {
@@ -291,9 +291,16 @@ export function getToastStyle() {
     };
 }
 
-export function restartGame(setInitialData, setTimer) {
+export function restartGame(initialData, setInitialData, setTimer) {
+    // Get winCount
+    const { winCount } = initialData;
+
     // set newInitialData
     const newInitialData = getInitialData();
+
+    // keep same winCount
+    newInitialData.winCount = winCount;
+
     setInitialData(newInitialData);
 
     // set Timer to 0

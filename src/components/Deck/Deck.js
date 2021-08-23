@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../Card/Card";
-import * as Style from "../../styles/styles";
+import * as Style from "./deckStyle";
 import { Droppable } from "react-beautiful-dnd";
 
 export default function Deck({ deck, selectedCards }) {
@@ -18,4 +18,3 @@ export default function Deck({ deck, selectedCards }) {
     );
 }
 
-// TODO: provided.innerRef ne işe yarıyor?

@@ -1,4 +1,3 @@
-// TODO: ayrı utils altına al bu clock fonklarını
 // seconds to time string [for clock component]
 export function secsToTimeString(secs) {
     secs = Math.round(secs);

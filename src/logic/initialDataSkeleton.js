@@ -1,5 +1,3 @@
-// TODO: bu dosya logic altına taşınabilir.
-
 export const initialDataSkeleton = {
     decks: {
         "deck-1": {

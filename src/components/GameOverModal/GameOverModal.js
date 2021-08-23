@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import RestartButton from "../RestartButton/RestartButton";
 import { TimerContext } from "../../contexts/timerContext";
-import * as Style from "./GameOverModalStyle";
+import * as Style from "./gameOverModalStyle";
 import Modal from "react-modal";
 import { secsToTimeString } from "../../utils/timeUtils";
 
@@ -22,6 +22,8 @@ const customStyles = {
         fontFamily: "arial",
         fontSize: "1.5rem",
         gap: "1rem",
+        color: "white",
+        backgroundColor: "rgba(40, 94, 152)",
     },
 };
 

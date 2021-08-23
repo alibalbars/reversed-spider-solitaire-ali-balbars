@@ -4,15 +4,14 @@ import _initialData from "./logic/initialData.js";
 import Deck from "./components/Deck/Deck";
 import Stock from "./components/Stock/Stock";
 import CompletedDecks from "./components/CompletedDecks/CompletedDecks";
-import * as Style from "./styles/styles";
+import * as Style from "./styles/appStyle";
 import {
     getSerialIndexes,
     moveCard,
     isThereCompletedSerial,
     isGameOver,
 } from "./utils/utils";
-// import GlobalStyle from "./styles/GlobalStyles";
-import GlobalStyle from "./styles/GlobalStyles";
+import GlobalStyle from "./styles/globalStyles";
 import { InitialDataContext } from "./contexts/initialDataContext.js";
 import { TimerContext } from "./contexts/timerContext.js";
 import { Toaster } from "react-hot-toast";
@@ -60,13 +59,20 @@ export default function App() {
         );
         console.log("~ newInitialData", newInitialData);
 
+
+
         setInitialData(newInitialData);
         isThereCompletedSerial(newInitialData); //TODO: ismi değişecek fonksiyonun
         // if(isGameOver(initialData)) {
         //     console.log('GAME IS OVER!!!');
         // }
         console.log(isGameOver(newInitialData));
-        setIsModalOpen(true);
+        if(isGameOver(newInitialData)) {
+            console.log('OYUN BİTTİ!!!!!!!!!!!!!');
+            newInitialData.winCount += 1;
+            setIsModalOpen(true);
+        }
+        
     }
 
     return (
@@ -108,18 +114,12 @@ export default function App() {
 }
 //TODO: oyun kazanıldığında modal göster
 //Metodlar iş yapmak yerine bir değer dönerse test daha kolay olur ??
-//TODO: S' ler Style yapılacak
 //TODO: Initial data'nın adı current data olarak değiştirilebilir. (gameData'da olabilir.)
 //TODO: Moves counter eklenebilir.
 //TODO: fonk'lara undefined kontrolü getirilecek.
 
-//TODO: initialData için context API kullanılabilir.
 //TODO: eslint eklenecek
-//TODO: card objelerinde deck id'leri yanlış
-//TODO: rank'ların hepsini number yapabiliriz
-//TODO: getCarriedCards mettodu oluşturulabilir => ondrag start'ta kullanılıyor.
 //TODO: yarn lock git ignore edilecek
-//TODO: resimler webp olacak
 //TODO: styles.js ismi değişecek
 //TODO: styles.js componentlere ayrılacak
 //TODO: SerialIndex's ismi değişebilir, seçili kart ve altındaki kartlar

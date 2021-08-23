@@ -1,13 +1,6 @@
-import cardInfo from "../utils/cardInfo.json";
-import { initialDataSkeleton } from "../utils/initialDataSkeleton";
+import cardInfo from "./cardInfo.json";
+import { initialDataSkeleton } from "./initialDataSkeleton";
 import * as _ from "lodash";
-
-const letterRanks = {
-    'A': 1,
-    'J': 11,
-    'Q': 12,
-    'K': 13,
-}
 
 function generateCards() {
     let cards = [];

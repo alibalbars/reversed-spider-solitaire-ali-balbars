@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { InitialDataContext } from "../../contexts/initialDataContext";
 import { TimerContext } from "../../contexts/timerContext";
-import * as Style from "./ClockStyle";
-import * as SharedStyle from "../../styles/_Shared";
+import * as Style from "./clockStyle";
+import * as SharedStyle from "../../styles/_shared";
 import { secsToTimeString } from "../../utils/timeUtils";
 
 export default function Clock() {

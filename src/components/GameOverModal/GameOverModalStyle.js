@@ -6,6 +6,7 @@ export const Button = styled.button`
     outline: none;
     font: inherit;
     background-color: grey;
+    color: inherit;
 `;
 
 export const ButtonWrapper = styled.button`
@@ -14,7 +15,9 @@ export const ButtonWrapper = styled.button`
         border: none;
         outline: none;
         font: inherit;
+        color: white;
         background-color: grey;
+        width: 100%;
     }
     display: inline-block;
     background-color: grey;

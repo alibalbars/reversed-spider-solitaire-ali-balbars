@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const RestartButton = styled.button`
-    display: block;
+    display: inline-flex;
+    justify-content: center;
     cursor: pointer;
     border: none;
     outline: none;

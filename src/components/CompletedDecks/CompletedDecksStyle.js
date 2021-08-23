@@ -9,8 +9,8 @@ export const CompletedDecks = styled.div`
     height: ${VAR.CARD_HEIGHT};
 
     position: fixed;
-    bottom: 2rem; //TODO:  5rem ler değişkene atanabilir.
-    right: 2rem;
+    right: ${VAR.SECTION_BOTTOM_PADDING};
+    bottom: ${VAR.SECTION_BOTTOM_PADDING};
 `;
 
 export const CardPlaceHolder = styled.div`
@@ -30,6 +30,4 @@ export const CardPlaceHolder = styled.div`
         width: 100%;
         height: 100%;
     }
-
-
 `;

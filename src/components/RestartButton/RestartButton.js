@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
 import { InitialDataContext } from "../../contexts/initialDataContext";
 import { TimerContext } from "../../contexts/timerContext";
-import * as Style from "./RestartButtonStyle";
-import * as SharedStyle from "../../styles/_Shared";
+import * as Style from "./restartButtonStyle";
+import * as SharedStyle from "../../styles/_shared";
 import toast from "react-hot-toast";
-import * as GlobalStyle from "../../styles/GlobalStyles";
+import * as GlobalStyle from "../../styles/globalStyles";
 import { restartGame, getToastStyle } from "../../utils/utils";
 
 
 export default function RestartButton(props) {
-    const { setInitialData } = useContext(InitialDataContext);
+    const { initialData, setInitialData } = useContext(InitialDataContext);
     const { timer, setTimer } = useContext(TimerContext);
 
     function handleClick() {
-        restartGame(setInitialData, setTimer);
+        restartGame(initialData, setInitialData, setTimer);
 
         toast(<GlobalStyle.Toast>Restarted</GlobalStyle.Toast>, {
             duration: 3000,

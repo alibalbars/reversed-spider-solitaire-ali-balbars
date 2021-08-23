@@ -3,14 +3,13 @@ import * as VAR from "../../styles/variables";
 
 export const Stock = styled.div`
     height: ${VAR.CARD_HEIGHT};
-    /* width: 12rem; */
     width: 12rem;
     border-radius: ${VAR.CARD_BORDER_RADIUS};
     background-color: transparent;
 
     position: fixed;
-    left: 5rem;
-    bottom: 2rem;
+    left: ${VAR.SECTION_BOTTOM_PADDING};
+    bottom: ${VAR.SECTION_BOTTOM_PADDING};
 
     cursor: pointer;
     user-select: none;
