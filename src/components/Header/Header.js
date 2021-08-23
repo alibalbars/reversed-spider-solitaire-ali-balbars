@@ -31,11 +31,11 @@ export default function Header() {
                         height={VAR.HEADER_ICON_HEIGHT}
                         alt="trophyIcon"
                     />
-                    <SharedStyle.NumberBox>{winCount}</SharedStyle.NumberBox>
+                    <SharedStyle.NumberBox data-cy="winCount">{winCount}</SharedStyle.NumberBox>
                 </SharedStyle.IconGroup>
             </div>
 
-            <Style.Text>Score: {score}</Style.Text>
+            <Style.Text data-cy="score">Score: {score}</Style.Text>
 
             <RestartButton>
                 <img

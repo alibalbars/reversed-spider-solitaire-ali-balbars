@@ -96,7 +96,7 @@ export default function App() {
                         ></Modal>
 
                         <Header></Header>
-                        <Style.Decks>
+                        <Style.Decks data-cy="decks">
                             {Object.keys(initialData.decks).map((deckId) => {
                                 const deck = initialData.decks[deckId];
                                 return (

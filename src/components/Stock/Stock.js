@@ -57,7 +57,7 @@ export default function Stock() {
     }
 
     return (
-        <Style.Stock onClick={deal} deckCount={stockDecks.length}>
+        <Style.Stock onClick={deal} deckCount={stockDecks.length} data-cy="stock">
             {stockDecks.map((e, index) => {
                 return <img key={index} src={backFaceImg} alt="Card backface image"/>;
             })}

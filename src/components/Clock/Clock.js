@@ -19,7 +19,7 @@ export default function Clock() {
 
     return (
         <Style.Clock>
-            <SharedStyle.NumberBox>{secsToTimeString(timer)}</SharedStyle.NumberBox>
+            <SharedStyle.NumberBox data-cy="timer">{secsToTimeString(timer)}</SharedStyle.NumberBox>
         </Style.Clock>
     );
 }

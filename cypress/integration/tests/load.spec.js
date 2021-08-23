@@ -1,6 +1,4 @@
-// const herokuUrl = "https://reversed-spyder-solitaire.herokuapp.com/";
-
-describe("The Home Page", () => {
+describe("Load Home Page", () => {
     beforeEach(() => {
         cy.visit('/');
     })
@@ -11,6 +9,6 @@ describe("The Home Page", () => {
 
     it('should have "reversed spider solitaire" title', () => {
         const title = cy.title();
-        title.should('equal', "Reversed Spyder Solitaire")  
+        title.should('equal', 'Reversed Spider Solitaire')  
     })
 });

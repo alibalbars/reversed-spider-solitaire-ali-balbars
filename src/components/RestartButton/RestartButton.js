@@ -24,10 +24,10 @@ export default function RestartButton(props) {
     }
 
     return (
-        <Style.RestartButton onClick={handleClick}>
+        <Style.RestartButton onClick={handleClick}  >
             <SharedStyle.IconGroup>
                 {props.children}
-                <span>Restart</span>
+                <span data-cy="restart">Restart</span>
             </SharedStyle.IconGroup>
         </Style.RestartButton>
     )

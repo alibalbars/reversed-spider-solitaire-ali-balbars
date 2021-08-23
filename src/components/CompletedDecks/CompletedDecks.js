@@ -9,7 +9,7 @@ export default function CompletedDecks() {
     // console.log('COMPLETED DECKSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS', initialData.completedDeckCount);
     
     return (
-        <Style.CompletedDecks>
+        <Style.CompletedDecks data-cy="completed-decks">
             {[...Array(8)].map((e, index) => (
                 <Style.CardPlaceHolder key={index}>
                     {completedDeckCount >= index +1 ? <img src={BackFaceImg} alt="Card backface image"/>: null}
