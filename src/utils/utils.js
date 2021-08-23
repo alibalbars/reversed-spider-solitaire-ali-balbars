@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import * as _ from "lodash";
-import * as GlobalStyle from "../styles/globalStyles"; // TODO: silinecek
+import * as GlobalStyle from "../styles/globalStyles";
 import { getInitialData } from "../logic/initialData.js";
 
 const letterRanks = {
@@ -9,14 +9,6 @@ const letterRanks = {
     Q: 12,
     K: 13,
 };
-
-// Throw and log error if value is undefined
-// function throwAndLogError(value, errorMessage) {
-//     if (value == undefined || value == null) {
-//         console.log(errorMessage);
-//         throw new Error(errorMessage);
-//     }
-// }
 
 // Throw and log error if given values is undefined or null
 function throwAndLogError() {
@@ -147,7 +139,7 @@ export function moveCard(destination, source, draggableId, initialData) {
         return startDeck.cards[index];
     });
 
-    // Prevent unwanted moves //TODO: HACK
+    // Prevent unwanted moves
     if(!isDroppable(selectedCard, endDeck)) {
         return initialData;
     }
@@ -276,10 +268,7 @@ export function isDeckHasCompletedCards(deck) {
     return false;
 }
 
-// Yeni initialDatayı döner //TODO: düzelt
-export function isThereCompletedSerial(initialData) {
-
-    //TODO: isim değişecek
+export function collectCompletedCardSerials(initialData) {
     Object.keys(initialData.decks).forEach((deckId) => {
         // Get deck
         const deck = initialData.decks[deckId];
@@ -335,6 +324,4 @@ export function restartGame(initialData, setInitialData, setTimer) {
 
     // set Timer to 0
     setTimer(0);
-
-    console.log("~ _initialData", getInitialData());
 }

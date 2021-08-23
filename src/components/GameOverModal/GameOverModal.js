@@ -30,7 +30,6 @@ const customStyles = {
 function GameOverModal(props) {
     function closeModal() {
         props.setIsModalOpen(false);
-        console.log("geldi");
     }
 
     return (

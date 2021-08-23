@@ -112,32 +112,7 @@ describe("utils functions tests", () => {
         });
     });
 
-    describe("moveCard function", () => {
-        //baştaki ifler kontrol edilebilir
-        // test("it should throw error when argument undefined or null", () => {
-        //     expect(() => UTIL.moveCard("not defined", undefined, undefined, undefined)).toThrowError(
-        //         "Argument is null or undefined"
-        //     );
-        // });
-        // test('it should return new initialData after move', () => {
-        //     const source = {droppableId: 0}
-        //     const destination = {droppableId: 1}
-        //     // const initialData = {...exampleInitialData};
-        //     const initialData = _.cloneDeep(exampleInitialData);
-        //     const draggableId = 31; // last card of first deck
-        //     const expectedData = _.cloneDeep(exampleInitialData);
-        //     // const newInitialData = initialData.decks
-        //     const card = expectedData.decks['deck-1'].cards.pop();
-        //     expectedData.decks['deck-2'].cards.push(card);
-        //     console.log("~ card", card)
-        //     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA~ destination", destination)
-        //     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA~ initialData", initialData.decks['deck-1'].cards)
-        //     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA~ draggableId", draggableId)
-        //     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA~ expectedData", expectedData.decks['deck-1'].cards)
-        //     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA~ source", source)
-        //     expect(UTIL.moveCard(destination, source, draggableId, initialData)).toEqual(expectedData);
-        // })
-    });
+    
 
     describe("getNewScore function", () => {
         test("it should throw error when argument undefined or null", () => {
@@ -152,18 +127,6 @@ describe("utils functions tests", () => {
             expect(result).toBe(101);
         });
     });
-
-    // describe('getNewStartDeck function', () => {
-    //     test('it should return ', () => {
-
-    //     })
-    // })
-
-    // describe('getNewEndDeck function', () => {
-    //     test('it should return ', () => {
-
-    //     })
-    // })
 
     describe("getOpenCardCount function", () => {
         test("it should throw error when argument undefined or null", () => {
@@ -201,11 +164,6 @@ describe("utils functions tests", () => {
         });
     });
 
-    // describe('removeCompletedCards function', () => {
-    //     test('it should return ', () => {
-
-    //     })
-    // })
 
     describe("isDeckHasCompletedCards function", () => {
         test("it should throw error when argument undefined or null", () => {
@@ -238,16 +196,6 @@ describe("utils functions tests", () => {
         });
     });
 
-    // describe('isThereCompletedSerial function', () => {
-    //     test("it should throw error when argument undefined or null", () => {
-    //         expect(() => UTIL.isThereCompletedSerial(undefined)).toThrowError(
-    //             "Argument is null or undefined"
-    //         );
-    //     });
-    //     test('it should return ', () => {
-        
-    //     })
-    // })
 
     describe('isGameOver', () => {
         test("it should throw error when argument undefined or null", () => {
@@ -275,11 +223,5 @@ describe("utils functions tests", () => {
             expect.objectContaining(result)
         })
     })
-
-    // describe('restartGame function', () => {
-    //     test('it should return ', () => {
-        
-    //     })
-    // })
 
 });

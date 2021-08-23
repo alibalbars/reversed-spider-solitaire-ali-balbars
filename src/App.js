@@ -8,7 +8,7 @@ import * as Style from "./styles/appStyle";
 import {
     getSerialIndexes,
     moveCard,
-    isThereCompletedSerial,
+    collectCompletedCardSerials,
     isGameOver,
 } from "./utils/utils";
 import GlobalStyle from "./styles/globalStyles";
@@ -23,11 +23,6 @@ export default function App() {
     const [selectedCards, setSelectedCards] = useState([]);
     const [timer, setTimer] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    useEffect(() => {
-        console.log("initialData", initialData);
-        // setOldDatas([_initialData])
-    }, []);
 
     // To make invisible the carried cards while dragging
     function onDragStart(start) {
@@ -58,17 +53,10 @@ export default function App() {
             draggableId,
             initialData
         );
-        console.log("~ newInitialData", newInitialData);
 
         setInitialData(newInitialData);
+        collectCompletedCardSerials(newInitialData); //TODO: ismi değişecek fonksiyonun
 
-
-        console.log("~ initialData", initialData);
-
-
-        isThereCompletedSerial(newInitialData); //TODO: ismi değişecek fonksiyonun
-
-        console.log(isGameOver(newInitialData));
         if (isGameOver(newInitialData)) {
             newInitialData.winCount += 1;
             setIsModalOpen(true);
@@ -116,16 +104,3 @@ export default function App() {
         </DragDropContext>
     );
 }
-//TODO: oyun kazanıldığında modal göster
-//Metodlar iş yapmak yerine bir değer dönerse test daha kolay olur ??
-//TODO: Initial data'nın adı current data olarak değiştirilebilir. (gameData'da olabilir.)
-//TODO: Moves counter eklenebilir.
-//TODO: fonk'lara undefined kontrolü getirilecek.
-
-//TODO: eslint eklenecek
-//TODO: yarn lock git ignore edilecek
-//TODO: styles.js ismi değişecek
-//TODO: styles.js componentlere ayrılacak
-//TODO: SerialIndex's ismi değişebilir, seçili kart ve altındaki kartlar
-//TODO: favicon ve uygulama adı değişecek
-//TODO: en son console.log'lar ve gereksiz yorum satırları silinecek.

@@ -6,7 +6,6 @@ import BackFaceImg from "../../assets/img/backface.webp";
 export default function CompletedDecks() {
     const { initialData } = useContext(InitialDataContext);
     const { completedDeckCount } = initialData;
-    // console.log('COMPLETED DECKSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS', initialData.completedDeckCount);
     
     return (
         <Style.CompletedDecks data-cy="completed-decks">
