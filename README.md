@@ -12,8 +12,10 @@ https://reversed-spyder-solitaire.herokuapp.com/
 ## Technologies Used
 - ReactJS
 - Styled Components
+- React Beautiful DND (Drag and Drop)
 - Jest
 - Cypress
+- ESLint
 - Heroku
 
 ## Installation
@@ -33,12 +35,13 @@ npm start
 npm run build
 ```
 ## Previews
-
-#### Main
-![deal](readme/main.webp)
-#### Deal
+### Gameplay
+![gameplay](readme/gameplay.gif)
+### Main
+![main](readme/main.webp)
+### Deal
 ![deal](readme/deal.gif)
-#### Restart
-![deal](readme/restart.gif)
-#### You won
-![deal](readme/youwon.webp)
+### Restart
+![restart](readme/restart.gif)
+### You won
+![youwon](readme/youwon.webp)
